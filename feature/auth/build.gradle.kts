@@ -1,5 +1,6 @@
 plugins {
     id("emptyapp.android.feature")
+    id("emptyapp.kotlin.serialization")
 }
 
 android {
@@ -11,6 +12,7 @@ dependencies {
     implementation(project(":core:network"))
     implementation(project(":core:design-system"))
 
+    implementation(libs.androidx.security.crypto)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.hilt.navigation.compose)

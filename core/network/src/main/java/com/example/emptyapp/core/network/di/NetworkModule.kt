@@ -3,9 +3,7 @@ package com.example.emptyapp.core.network.di
 import com.example.emptyapp.core.network.BuildConfig
 import com.example.emptyapp.core.network.interceptor.AuthInterceptor
 import com.example.emptyapp.core.network.interceptor.HeaderInterceptor
-import com.example.emptyapp.core.network.interceptor.TokenExpiryAuthenticator
 import com.example.emptyapp.core.network.loggingLevelFor
-import com.example.emptyapp.core.network.token.SessionManager
 import com.example.emptyapp.core.network.token.TokenProvider
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -54,16 +52,10 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideTokenExpiryAuthenticator(sessionManager: SessionManager): TokenExpiryAuthenticator =
-        TokenExpiryAuthenticator(sessionManager)
-
-    @Provides
-    @Singleton
     fun provideOkHttpClient(
         headerInterceptor: HeaderInterceptor,
         authInterceptor: AuthInterceptor,
         loggingInterceptor: HttpLoggingInterceptor,
-        tokenExpiryAuthenticator: TokenExpiryAuthenticator,
     ): OkHttpClient = OkHttpClient.Builder()
         .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
@@ -71,7 +63,6 @@ object NetworkModule {
         .addInterceptor(headerInterceptor)
         .addInterceptor(authInterceptor)
         .addInterceptor(loggingInterceptor)
-        .authenticator(tokenExpiryAuthenticator)
         .build()
 
     @Provides

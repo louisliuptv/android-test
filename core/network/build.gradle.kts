@@ -8,15 +8,15 @@ android {
     namespace = "com.example.emptyapp.core.network"
 
     defaultConfig {
-        buildConfigField("String", "BASE_URL", "\"https://api.example.com/\"")
+        buildConfigField("String", "BASE_URL", "\"https://ios-gp-fake-booking-api.vercel.app/\"")
     }
 
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "\"https://api.example.com/\"")
+            buildConfigField("String", "BASE_URL", "\"https://ios-gp-fake-booking-api.vercel.app/\"")
         }
         release {
-            buildConfigField("String", "BASE_URL", "\"https://api.example.com/\"")
+            buildConfigField("String", "BASE_URL", "\"https://ios-gp-fake-booking-api.vercel.app/\"")
         }
     }
 }
