@@ -1,3 +1,5 @@
+import com.example.emptyapp.buildlogic.catalog
+import com.example.emptyapp.buildlogic.library
 import org.gradle.api.JavaVersion
 
 plugins {
@@ -14,5 +16,5 @@ kotlin {
 }
 
 dependencies {
-    add("implementation", libs.kotlinx.coroutines.core)
+    add("implementation", catalog.library("kotlinx-coroutines-core"))
 }

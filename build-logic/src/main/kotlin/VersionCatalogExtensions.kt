@@ -10,4 +10,4 @@ internal val Project.catalog: VersionCatalog
     get() = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
 internal fun VersionCatalog.library(alias: String): MinimalExternalModuleDependency =
-    findLibrary(alias).get()
+    findLibrary(alias).get().get()
