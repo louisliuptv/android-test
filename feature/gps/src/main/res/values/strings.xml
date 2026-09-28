@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gps_list_title">GPs</string>
+    <string name="gps_list_refresh">Refresh</string>
+    <string name="gps_list_logout">Log out</string>
+    <string name="gps_list_retry">Retry</string>
+    <string name="gps_list_empty">No GPs found</string>
+    <string name="gps_list_rating">★ %1$s</string>
+
+    <string name="gps_detail_back">Back</string>
+    <string name="gps_detail_title">GP details</string>
+    <string name="gps_detail_rating">Rating: ★ %1$s</string>
+    <string name="gps_detail_experience">Experience: %1$d years</string>
+    <string name="gps_detail_postcode">Postcode: %1$s</string>
+    <string name="gps_detail_languages">Languages: %1$s</string>
+    <string name="gps_detail_clinic_name">Clinic: %1$s</string>
+    <string name="gps_detail_clinic_address">Address: %1$s</string>
+    <string name="gps_detail_clinic_phone">Phone: %1$s</string>
+    <string name="gps_detail_slots_title">Available slots</string>
+    <string name="gps_detail_no_slots">No available slots</string>
+    <string name="gps_detail_slot">%1$s - %2$s</string>
+    <string name="gps_detail_error_missing_id">No GP selected</string>
+</resources>

@@ -1,5 +1,6 @@
 plugins {
     id("emptyapp.android.feature")
+    id("emptyapp.kotlin.serialization")
 }
 
 android {
