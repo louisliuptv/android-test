@@ -3,8 +3,8 @@ package com.example.emptyapp.feature.gps.presentation.detail
 import androidx.lifecycle.SavedStateHandle
 import com.example.emptyapp.core.common.result.ApiError
 import com.example.emptyapp.core.common.result.ApiResult
-import com.example.emptyapp.core.common.ui.ErrorMessageProvider
-import com.example.emptyapp.core.common.ui.UiText
+import com.example.emptyapp.core.designsystem.text.ErrorMessageProvider
+import com.example.emptyapp.core.designsystem.text.UiText
 import com.example.emptyapp.feature.gps.MainDispatcherRule
 import com.example.emptyapp.feature.gps.R
 import com.example.emptyapp.feature.gps.domain.model.Gps

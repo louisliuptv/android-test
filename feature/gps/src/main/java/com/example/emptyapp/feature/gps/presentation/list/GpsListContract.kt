@@ -3,7 +3,7 @@ package com.example.emptyapp.feature.gps.presentation.list
 import com.example.emptyapp.core.common.mvi.UiEffect
 import com.example.emptyapp.core.common.mvi.UiEvent
 import com.example.emptyapp.core.common.mvi.UiState
-import com.example.emptyapp.core.common.ui.UiText
+import com.example.emptyapp.core.designsystem.text.UiText
 import com.example.emptyapp.feature.gps.domain.model.Gps
 
 data class GpsListState(

@@ -3,8 +3,8 @@ package com.example.emptyapp.feature.auth.presentation
 import com.example.emptyapp.core.common.mvi.BaseMviViewModel
 import com.example.emptyapp.core.common.result.onFailure
 import com.example.emptyapp.core.common.result.onSuccess
-import com.example.emptyapp.core.common.ui.ErrorMessageProvider
-import com.example.emptyapp.core.common.ui.UiText
+import com.example.emptyapp.core.designsystem.text.ErrorMessageProvider
+import com.example.emptyapp.core.designsystem.text.UiText
 import com.example.emptyapp.feature.auth.R
 import com.example.emptyapp.feature.auth.domain.usecase.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

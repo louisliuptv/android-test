@@ -1,5 +1,7 @@
-package com.example.emptyapp.core.common.ui
+package com.example.emptyapp.core.designsystem.di
 
+import com.example.emptyapp.core.designsystem.text.DefaultErrorMessageProvider
+import com.example.emptyapp.core.designsystem.text.ErrorMessageProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -8,7 +10,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object ErrorMessageModule {
+object DesignSystemModule {
 
     @Provides
     @Singleton

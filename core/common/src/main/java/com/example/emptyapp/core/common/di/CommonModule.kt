@@ -1,5 +1,7 @@
-package com.example.emptyapp.core.common.dispatcher
+package com.example.emptyapp.core.common.di
 
+import com.example.emptyapp.core.common.dispatcher.DefaultDispatcherProvider
+import com.example.emptyapp.core.common.dispatcher.DispatcherProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -8,7 +10,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DispatcherModule {
+object CommonModule {
 
     @Provides
     @Singleton

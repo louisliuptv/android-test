@@ -1,8 +1,8 @@
-package com.example.emptyapp.core.common.ui
+package com.example.emptyapp.core.designsystem.text
 
 import androidx.annotation.StringRes
-import com.example.emptyapp.core.common.R
 import com.example.emptyapp.core.common.result.ApiError
+import com.example.emptyapp.core.designsystem.R
 
 /**
  * Maps an [ApiError] to user-facing [UiText]. Implement this when a screen

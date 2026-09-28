@@ -11,7 +11,6 @@ dependencies {
     api(libs.kotlinx.coroutines.core)
     api(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.androidx.annotation)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockk)

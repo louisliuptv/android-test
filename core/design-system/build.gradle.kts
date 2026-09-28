@@ -1,6 +1,7 @@
 plugins {
     id("emptyapp.android.library")
     id("emptyapp.android.compose")
+    id("emptyapp.android.hilt")
 }
 
 android {
@@ -8,7 +9,10 @@ android {
 }
 
 dependencies {
+    api(project(":core:common"))
+
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.annotation)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockk)

@@ -1,7 +1,7 @@
-package com.example.emptyapp.core.common.ui
+package com.example.emptyapp.core.designsystem.text
 
-import com.example.emptyapp.core.common.R
 import com.example.emptyapp.core.common.result.ApiError
+import com.example.emptyapp.core.designsystem.R
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

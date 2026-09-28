@@ -4,8 +4,8 @@ import androidx.lifecycle.SavedStateHandle
 import com.example.emptyapp.core.common.mvi.BaseMviViewModel
 import com.example.emptyapp.core.common.result.onFailure
 import com.example.emptyapp.core.common.result.onSuccess
-import com.example.emptyapp.core.common.ui.ErrorMessageProvider
-import com.example.emptyapp.core.common.ui.UiText
+import com.example.emptyapp.core.designsystem.text.ErrorMessageProvider
+import com.example.emptyapp.core.designsystem.text.UiText
 import com.example.emptyapp.feature.gps.R
 import com.example.emptyapp.feature.gps.domain.usecase.GetGpsDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

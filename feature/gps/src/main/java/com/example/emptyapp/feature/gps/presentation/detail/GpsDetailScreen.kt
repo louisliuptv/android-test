@@ -24,10 +24,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.emptyapp.core.designsystem.text.asString
 import com.example.emptyapp.feature.gps.R
 import com.example.emptyapp.feature.gps.domain.model.Clinic
 import com.example.emptyapp.feature.gps.domain.model.Gps
-import com.example.emptyapp.feature.gps.presentation.asString
 
 @Composable
 fun GpsDetailScreen(

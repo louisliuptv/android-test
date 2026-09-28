@@ -3,7 +3,7 @@ package com.example.emptyapp.feature.auth.presentation
 import com.example.emptyapp.core.common.mvi.UiEffect
 import com.example.emptyapp.core.common.mvi.UiEvent
 import com.example.emptyapp.core.common.mvi.UiState
-import com.example.emptyapp.core.common.ui.UiText
+import com.example.emptyapp.core.designsystem.text.UiText
 
 data class LoginState(
     val email: String = "",

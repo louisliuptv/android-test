@@ -24,7 +24,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.emptyapp.core.common.ui.UiText
+import com.example.emptyapp.core.designsystem.text.asString
 import com.example.emptyapp.feature.auth.R
 
 @Composable
@@ -118,10 +118,4 @@ private fun LoginContent(
             }
         }
     }
-}
-
-@Composable
-fun UiText.asString(): String = when (this) {
-    is UiText.DynamicString -> value
-    is UiText.StringResource -> stringResource(resId, *args.toTypedArray())
 }
