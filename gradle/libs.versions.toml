@@ -7,6 +7,7 @@ coreKtx = "1.13.1"
 appcompat = "1.7.0"
 material = "1.12.0"
 constraintlayout = "2.1.4"
+androidxAnnotation = "1.9.1"
 
 composeBom = "2024.10.01"
 activityCompose = "1.9.3"
@@ -31,6 +32,7 @@ espresso = "3.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "androidxAnnotation" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }

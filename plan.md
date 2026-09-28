@@ -7,8 +7,8 @@ Derived from `AGENTS.md`: MVI, clean architecture, and Gradle modularization.
 - **MVI** per screen: `StateFlow` for UI state, `SharedFlow` for one-off events, `Channel` for side effects (navigation, snackbar).
 - **Clean architecture** per feature: `domain` (repository interface + use cases), `data` (api service, datasource, repository impl), `presenter` (Compose screen + ViewModel).
 - **Modules**:
-  - `:core:common` - base MVI ViewModel, `ApiResult`, `ApiError` / user-facing messages, dispatchers, token contracts.
-  - `:core:network` - Retrofit, OkHttp, interceptors, auth/refresh flow.
+  - `:core:common` - base MVI ViewModel, `ApiResult`, `ApiError` / user-facing messages, dispatchers.
+  - `:core:network` - Retrofit, OkHttp, interceptors, auth flow and token contracts.
   - `:core:design-system` - Material 3 theme + reusable UI components.
   - `:app` - single `MainActivity`, Compose nav graph, DI wiring.
   - `:feature:auth` - login.
@@ -52,10 +52,10 @@ Deliverable: empty modules compile; commit tagged `phase-1-setup`.
 
 ## Phase 2 - `:core:common`
 
-Goal: shared MVI base, result/error model, token contracts.
+Goal: shared MVI base, result/error model.
 
 1. Coroutines: `DispatcherProvider` interface + `DefaultDispatcherProvider`; inject dispatchers (testable).
-2. Result model:
+2. Result model (lives here in `:core:common`, consumed by every module):
    - `sealed interface ApiResult<out T>`: `Success(data)`, `Failure(ApiError)`.
    - `sealed interface ApiError`: `NoNetwork`, `Timeout`, `Unauthorized`, `Forbidden`, `BadRequest`, `NotFound`, `Server`, `Serialization`, `Unknown`.
    - `ApiError.toUiText()` / `ErrorMessageProvider` mapping error -> string resource id (no Android imports in `domain`; mapping lives in a `presenter`/common-Android source set).
@@ -66,11 +66,7 @@ Goal: shared MVI base, result/error model, token contracts.
    - `Channel<Effect> effects` exposed as `Flow` for one-off side effects.
    - `fun setState(reducer: State.() -> State)` and `sendEffect(effect)`.
    - Safe `launch` helper catching exceptions into state/effects.
-4. Token status contract (no persistence logic):
-   - `sealed interface TokenStatus { object Authenticated; object Unauthenticated; data class Expired(...) }`.
-   - `interface TokenProvider { fun currentAccessToken(): String?; suspend fun refreshToken(): TokenStatus }`.
-   - `interface SessionManager { val sessionState: StateFlow<TokenStatus>; fun onTokenExpired() }`.
-5. Unit tests: `ApiResult`/`ApiError` mapping, base ViewModel state/effect emission (Turbine).
+4. Unit tests: `ApiResult`/`ApiError` mapping, base ViewModel state/effect emission (Turbine).
 
 Verification: `./gradlew :core:common:testDebugUnitTest`.
 
@@ -78,12 +74,12 @@ Verification: `./gradlew :core:common:testDebugUnitTest`.
 
 ## Phase 3 - `:core:network`
 
-Goal: Retrofit/OkHttp stack with auth, logging, and error translation.
+Goal: Retrofit/OkHttp stack with auth, logging, error translation, and the token contracts.
 
 1. OkHttp client assembly via Hilt `@Provides`:
    - `Timeouts` (connect/read/write), `HttpLoggingInterceptor` (**level `BODY` on debug, `NONE` in release** - decided by `BuildConfig.DEBUG` or a `NetworkConfig.isDebug`), redact `Authorization` headers.
    - `AuthInterceptor`: adds `Authorization: Bearer <accessToken>` from `TokenProvider`; skips auth endpoints.
-   - `Authenticator` (401 handling): on `401`, call `TokenProvider.refreshToken()` once; on failure -> `SessionManager.onTokenExpired()` and emit `Unauthenticated`.
+   - `Authenticator` (401 handling): on `401`, clear the session via `SessionManager.onSessionExpired()` and emit `TokenStatus.Unauthenticated` (no refresh flow).
    - Optional `NetworkConnectivityInterceptor` / `CacheInterceptor` + offline cache.
    - `HeaderInterceptor` (User-Agent, Accept, App-Version).
 2. Retrofit setup:
@@ -94,8 +90,12 @@ Goal: Retrofit/OkHttp stack with auth, logging, and error translation.
    - `HttpException -> ApiError` mapping: `400 BadRequest`, `401 Unauthorized`, `403 Forbidden`, `404 NotFound`, `5xx Server`, parse error body for server message when available.
    - Central `NetworkErrorMapper` used by both `safeApiCall` and repository layer.
 4. Hilt module (`NetworkModule`) exposing `OkHttpClient`, `Retrofit`, `Json`, qualifiers for authenticated vs unauthenticated clients.
-5. Token contract implementation binding placeholder until Phase 5 (`feature:auth`) provides the real store.
-6. Unit tests: interceptor header injection, log-level selection per build type, `HttpException` -> `ApiError` mapping, authenticator refresh-once behavior (MockWebServer).
+5. Token contracts (live in `:core:network`; consumed by the interceptors, implemented by `feature:auth` in Phase 5):
+   - `sealed interface TokenStatus { object Authenticated; object Unauthenticated }`.
+   - `interface TokenProvider { fun currentAccessToken(): String?; fun currentStatus(): TokenStatus }`.
+   - `interface SessionManager { val sessionState: StateFlow<TokenStatus>; fun onSessionExpired() }`.
+   - Provide a no-op placeholder binding until Phase 5 supplies the real store.
+6. Unit tests: interceptor header injection, log-level selection per build type, `HttpException` -> `ApiError` mapping, `401` triggers `SessionManager.onSessionExpired()` + `TokenStatus.Unauthenticated` (MockWebServer).
 
 Verification: `./gradlew :core:network:testDebugUnitTest`.
 

@@ -6,16 +6,29 @@ plugins {
 
 android {
     namespace = "com.example.emptyapp.core.network"
+
+    defaultConfig {
+        buildConfigField("String", "BASE_URL", "\"https://api.example.com/\"")
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://api.example.com/\"")
+        }
+        release {
+            buildConfigField("String", "BASE_URL", "\"https://api.example.com/\"")
+        }
+    }
 }
 
 dependencies {
-    implementation(project(":core:common"))
+    api(project(":core:common"))
 
-    implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.retrofit)
+    api(libs.retrofit)
+    api(libs.okhttp)
     implementation(libs.retrofit.kotlinx.serialization)
-    implementation(libs.okhttp)
     implementation(libs.okhttp.logging)
+    implementation(libs.kotlinx.coroutines.android)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockk)

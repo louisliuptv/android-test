@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_no_network">No internet connection. Please check your network and try again.</string>
+    <string name="error_timeout">The request timed out. Please try again.</string>
+    <string name="error_unauthorized">Your session has expired. Please sign in again.</string>
+    <string name="error_forbidden">You don\'t have permission to perform this action.</string>
+    <string name="error_bad_request">The request was invalid. Please try again.</string>
+    <string name="error_not_found">The requested item could not be found.</string>
+    <string name="error_server">Something went wrong on our side. Please try again later.</string>
+    <string name="error_serialization">We received an unexpected response. Please try again.</string>
+    <string name="error_unknown">An unexpected error occurred. Please try again.</string>
+</resources>
