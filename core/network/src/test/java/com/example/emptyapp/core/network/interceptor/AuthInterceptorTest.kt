@@ -1,7 +1,6 @@
 package com.example.emptyapp.core.network.interceptor
 
 import com.example.emptyapp.core.network.token.TokenProvider
-import com.example.emptyapp.core.network.token.TokenStatus
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.mockwebserver.MockResponse
@@ -62,8 +61,5 @@ class AuthInterceptorTest {
 
     private class FakeTokenProvider(private val token: String?) : TokenProvider {
         override fun currentAccessToken(): String? = token
-
-        override fun currentStatus(): TokenStatus =
-            if (token.isNullOrBlank()) TokenStatus.Unauthenticated else TokenStatus.Authenticated
     }
 }

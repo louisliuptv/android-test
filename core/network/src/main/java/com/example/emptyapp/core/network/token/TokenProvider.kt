@@ -1,10 +1,9 @@
 package com.example.emptyapp.core.network.token
 
 /**
- * Read access to the current access token. Implemented by `:feature:auth` in
- * Phase 5 (Keystore + encrypted storage + in-memory cache).
+ * Read access to the current access token. A missing/blank token simply means
+ * the caller is not signed in; there is no separate auth state to query.
  */
 interface TokenProvider {
     fun currentAccessToken(): String?
-    fun currentStatus(): TokenStatus
 }

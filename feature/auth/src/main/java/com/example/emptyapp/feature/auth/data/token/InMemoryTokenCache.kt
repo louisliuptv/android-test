@@ -1,24 +1,19 @@
 package com.example.emptyapp.feature.auth.data.token
 
-import com.example.emptyapp.core.network.token.TokenProvider
-import com.example.emptyapp.core.network.token.TokenStatus
 import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * In-memory, fast-access copy of the access token. Implements the network
- * [TokenProvider] contract and is the single source during a session.
+ * In-memory, fast-access copy of the access token. The single source of truth
+ * during a session; [TokenStore] keeps it in sync with the keystore.
  */
 @Singleton
-class InMemoryTokenCache @Inject constructor() : TokenProvider {
+class InMemoryTokenCache @Inject constructor() {
 
     @Volatile
     private var accessToken: String? = null
 
-    override fun currentAccessToken(): String? = accessToken
-
-    override fun currentStatus(): TokenStatus =
-        if (accessToken.isNullOrBlank()) TokenStatus.Unauthenticated else TokenStatus.Authenticated
+    fun currentAccessToken(): String? = accessToken
 
     fun update(token: String?) {
         accessToken = token

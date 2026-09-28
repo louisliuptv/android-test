@@ -4,9 +4,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AvailableSlotDto(
-    val dateTime: String = "",
-    val startTime: String = "",
-    val endTime: String = "",
-    val duration: Int = 0,
-    val available: Boolean = false,
+    val dateTime: String? = null,
+    val startTime: String? = null,
+    val endTime: String? = null,
+    val duration: Int? = null,
+    val available: Boolean? = null,
 )

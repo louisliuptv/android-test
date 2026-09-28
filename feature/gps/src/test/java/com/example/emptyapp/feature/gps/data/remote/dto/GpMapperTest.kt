@@ -3,6 +3,7 @@ package com.example.emptyapp.feature.gps.data.remote.dto
 import com.example.emptyapp.feature.gps.domain.model.AvailableSlot
 import com.example.emptyapp.feature.gps.domain.model.Clinic
 import com.example.emptyapp.feature.gps.domain.model.Gps
+import kotlinx.serialization.json.Json
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -83,5 +84,31 @@ class GpMapperTest {
         assertEquals(emptyList<String>(), gps.languages)
         assertEquals(emptyList<AvailableSlot>(), gps.availableSlots)
         assertEquals(null, gps.clinic)
+    }
+
+    @Test
+    fun `deserializes when the backend omits every attribute`() {
+        val json = Json {
+            ignoreUnknownKeys = true
+            explicitNulls = false
+        }
+
+        val gps = json.decodeFromString<GpDto>("{}").toDomain()
+
+        assertEquals(
+            Gps(
+                id = 0,
+                name = "",
+                specialization = "",
+                clinicId = 0,
+                postcode = "",
+                yearsOfExperience = 0,
+                rating = 0.0,
+                languages = emptyList(),
+                availableSlots = emptyList(),
+                clinic = null,
+            ),
+            gps,
+        )
     }
 }
